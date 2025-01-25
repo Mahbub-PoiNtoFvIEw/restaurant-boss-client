@@ -1,0 +1,9 @@
+.spacing-sm{
+    letter-spacing: 6.5px;
+}
+.spacing-lg{
+    letter-spacing: 14px;
+}
+.spacing-xl{
+    letter-spacing: 1rem;
+}
