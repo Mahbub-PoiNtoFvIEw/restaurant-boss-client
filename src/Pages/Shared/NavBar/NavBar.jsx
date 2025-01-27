@@ -1,7 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
-import '../NavBar/NavBar.css'
+import "../NavBar/NavBar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProviders";
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then((result) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const navLinks = (
     <>
       <li>
@@ -13,6 +24,20 @@ const NavBar = () => {
       <li>
         <NavLink to={`/order/salad`}>Order Food</NavLink>
       </li>
+      <li>
+        <NavLink to={`/secret`}>Secret</NavLink>
+      </li>
+      {user ? (
+        <>
+          <button onClick={handleLogout} className="btn btn-ghost">Logout</button>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to={`/login`}>Login</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -40,15 +65,15 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-[#0000004D] rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-                {navLinks}
+              {navLinks}
             </ul>
           </div>
-          <Link to={`/`} className="text-2xl uppercase font-bold flex flex-col">Bistro Boss<span className="spacing-sm text-sm">Restaurant</span></Link>
+          <Link to={`/`} className="text-2xl uppercase font-bold flex flex-col">
+            Bistro Boss<span className="spacing-sm text-sm">Restaurant</span>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navLinks}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>
