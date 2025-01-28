@@ -2,9 +2,14 @@ import { Link, NavLink } from "react-router-dom";
 import "../NavBar/NavBar.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
+import { BsCart } from "react-icons/bs";
+import { FiShoppingCart } from "react-icons/fi";
+import useCart from "../../../Hooks/useCart";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
+  console.log(cart);
 
   const handleLogout = () => {
     logOut()
@@ -27,17 +32,6 @@ const NavBar = () => {
       <li>
         <NavLink to={`/secret`}>Secret</NavLink>
       </li>
-      {user ? (
-        <>
-          <button onClick={handleLogout} className="btn btn-ghost">Logout</button>
-        </>
-      ) : (
-        <>
-          <li>
-            <NavLink to={`/login`}>Login</NavLink>
-          </li>
-        </>
-      )}
     </>
   );
   return (
@@ -75,8 +69,33 @@ const NavBar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end items-center">
+          <Link to={`/dashboard/cart`}>
+            <div className="relative mr-1">
+              <FiShoppingCart className="text-5xl"></FiShoppingCart>
+              <p className="absolute font-bold text-[16px] top-2 right-2 text-[#ee8e0e]">+{cart.length}</p>
+            </div>
+          </Link>
+          {user ? (
+            <>
+              <button onClick={handleLogout} className="btn px-1 py-0 ml-2 mr-1 btn-ghost">
+                Logout
+              </button>
+              {user?.photoURL && (
+                <img
+                  className="h-10 w-10 rounded-full border-2"
+                  src={user?.photoURL}
+                  alt=""
+                />
+              )}
+            </>
+          ) : (
+            <>
+              <button className="btn btn-ghost">
+                <NavLink to={`/login`}>Login</NavLink>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </>
