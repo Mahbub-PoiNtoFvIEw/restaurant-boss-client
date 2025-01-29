@@ -81,7 +81,7 @@ const AllUsers = () => {
               {/* row  */}
               {users.map((user, idx) => (
                 <tr key={idx}>
-                  <th>{(idx = 1)}</th>
+                  <th>{(idx + 1)}</th>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>

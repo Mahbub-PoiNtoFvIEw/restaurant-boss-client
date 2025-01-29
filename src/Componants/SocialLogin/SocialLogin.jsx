@@ -29,8 +29,8 @@ const SocialLogin = () => {
     }
     return (
         <div className='flex gap-6 justify-center items-center mt-2'>
-            <button onClick={handleGoogleSignIn} className='text-lg border-2 rounded-full p-1 text-center cursor-pointer'><FaFacebookF></FaFacebookF></button>
-            <button className='text-lg border-2 rounded-full p-1 text-center cursor-pointer'><FaGoogle></FaGoogle></button>
+            <button className='text-lg border-2 rounded-full p-1 text-center cursor-pointer'><FaFacebookF></FaFacebookF></button>
+            <button onClick={handleGoogleSignIn} className='text-lg border-2 rounded-full p-1 text-center cursor-pointer'><FaGoogle></FaGoogle></button>
             <button className='text-lg border-2 rounded-full p-1 text-center cursor-pointer'><FaGithub></FaGithub></button>
         </div>
     );
