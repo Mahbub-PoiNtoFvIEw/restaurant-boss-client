@@ -5,11 +5,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Componants/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {createUser, updateUserProfile, logOut} = useContext(AuthContext);
+  const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -20,30 +23,39 @@ const SignUp = () => {
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
-    .then(result=>{
+      .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
         updateUserProfile(data.name, data.photoURL)
-        .then(()=>{
-            console.log("user profile info updated");
-            reset();
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "User Created successfully..!",
-                showConfirmButton: false,
-                timer: 1500
-              });
-              logOut();
-              navigate('/login');
-        })
-        .catch(err=>{
+          .then(() => {
+            // console.log("user profile info updated");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user added to the database");
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User Created successfully..!",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                logOut();
+                navigate("/login");
+              }
+            });
+          })
+          .catch((err) => {
             console.log(err);
-        })
-    })
-    .catch(err=>{
+          });
+      })
+      .catch((err) => {
         console.err(err.message);
-    })
+      });
   };
 
   return (
@@ -62,7 +74,7 @@ const SignUp = () => {
             </p>
           </div>
           <div className="card bg-base-100 md:w-1/2 max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body pb-0">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -147,6 +159,8 @@ const SignUp = () => {
                   value="SinUp"
                 />
               </div>
+            </form>
+            <div className="text-center py-2">
               <div>
                 <p>
                   Already Registered ?
@@ -154,8 +168,13 @@ const SignUp = () => {
                     Go to Log in
                   </Link>
                 </p>
+                <div className="divider px-8 my-0"></div>
+                <span>Or Sign in with</span>
               </div>
-            </form>
+              <div className="mx-auto">
+                <SocialLogin></SocialLogin>
+              </div>
+            </div>
           </div>
         </div>
       </div>

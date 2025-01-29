@@ -9,6 +9,7 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Componants/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -35,23 +36,23 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         Swal.fire({
-            title: "Login successful..!",
-            showClass: {
-              popup: `
+          title: "Login successful..!",
+          showClass: {
+            popup: `
                 animate__animated
                 animate__fadeInUp
                 animate__faster
-              `
-            },
-            hideClass: {
-              popup: `
+              `,
+          },
+          hideClass: {
+            popup: `
                 animate__animated
                 animate__fadeOutDown
                 animate__faster
-              `
-            }
-          });
-          navigate(from, {replace: true});
+              `,
+          },
+        });
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         setDisabled(true);
@@ -85,7 +86,7 @@ const Login = () => {
             </p>
           </div>
           <div className="card bg-base-100 md:w-1/2 max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleLogin} className="card-body">
+            <form onSubmit={handleLogin} className="card-body pb-0">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -133,7 +134,7 @@ const Login = () => {
                   ref={captchaRef}
                 />
                 <button
-                type="button"
+                  type="button"
                   onClick={handleValidateCaptcha}
                   className="btn btn-outline btn-xs mt-2 w-full"
                 >
@@ -148,15 +149,22 @@ const Login = () => {
                   value="Login"
                 />
               </div>
-              <div>
-                <p>
-                  New here ?
-                  <Link to={`/signup`} className="btn btn-link pl-1">
-                    Create a new account
-                  </Link>
-                </p>
-              </div>
             </form>
+            <div className="text-center py-2">
+                <div>
+                  <p>
+                    New here ?
+                    <Link to={`/signup`} className="btn btn-link pl-1">
+                      Create a new account
+                    </Link>
+                  </p>
+                  <div className="divider px-8 my-0"></div>
+                  <span>Or Sign in with</span>
+                </div>
+                <div className="mx-auto">
+                  <SocialLogin></SocialLogin>
+                </div>
+              </div>
           </div>
         </div>
       </div>
