@@ -5,6 +5,7 @@ import { AuthContext } from "../../../Providers/AuthProviders";
 import { BsCart } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import useCart from "../../../Hooks/useCart";
+import { Tooltip } from "react-tooltip";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -83,11 +84,13 @@ const NavBar = () => {
               </button>
               {user?.photoURL && (
                 <img
-                  className="h-10 w-10 rounded-full border-2"
+                data-tooltip-id="my-tooltip" data-tooltip-content={user?.email}
+                  className="h-10 w-10 rounded-full border-2 cursor-pointer"
                   src={user?.photoURL}
                   alt=""
                 />
               )}
+              <Tooltip id="my-tooltip" />
             </>
           ) : (
             <>
