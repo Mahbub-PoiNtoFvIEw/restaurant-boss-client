@@ -1,16 +1,17 @@
 import React from "react";
-import useCart from "../../../Hooks/useCart";
+import SectionTitle from "../../Componants/SectionTitle/SectionTitle";
+import useMenu from "../../Hooks/useMenu";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import SectionTitle from "../../../Componants/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
-const Cart = () => {
-  const [cart, refetch] = useCart();
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+const ManageItems = () => {
+  const [menu, refetch] = useMenu();
   const axiosSecure = useAxiosSecure();
 
-  const handleDelete = (id) => {
+  const handleDeleteItem = (item) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -19,29 +20,32 @@ const Cart = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/carts/${id}`).then((res) => {
+        const res = await axiosSecure.delete(`/menu/${item._id}`);
+        console.log(res.data, item);
+        if (res.data.deletedCount > 0) {
           refetch();
-          if (res.data.deleteCount > 0) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-          }
-        });
+          Swal.fire({
+            position: "bottom-end",
+            icon: "success",
+            title: `${item.name} has been deleted`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       }
     });
   };
   return (
     <div>
-        <SectionTitle subHeading={"My Cart"} Heading={"WANNA ADD MORE?"}></SectionTitle>
+      <SectionTitle
+        Heading="MANAGE ALL ITEMS"
+        subHeading="Hurry up!"
+      ></SectionTitle>
       <div className="bg-[#FFFFFF] mx:p-10 p-2 md:mx-10">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Items : {cart.length}</h2>
-          <h2 className="text-2xl font-bold">Total Price : ${totalPrice}</h2>
-          <button className="btn  bg-[#D1A054] text-white">Pay</button>
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold">Total Items: {menu.length}</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="table">
@@ -52,13 +56,14 @@ const Cart = () => {
                 <th>Item Image</th>
                 <th>Item Name</th>
                 <th>Price</th>
+                <th>Action</th>
                 <th className="rounded-tr-xl">Action</th>
               </tr>
             </thead>
             <tbody>
               {/* row  */}
-              {cart.map((item, idx) => (
-                <tr key={item._id}>
+              {menu.map((item, idx) => (
+                <tr key={idx}>
                   <th>{idx + 1}</th>
                   <td>
                     <div className="flex items-center gap-3">
@@ -73,10 +78,17 @@ const Cart = () => {
                     </div>
                   </td>
                   <td>{item.name}</td>
-                  <td>${item.price}</td>
+                  <td>{item.price}</td>
+                  <td>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      <button className="p-2 rounded-sm cursor-pointer bg-[#D1A054] text-[#FFFFFF] text-xl">
+                        <FaEdit></FaEdit>
+                      </button>
+                    </Link>
+                  </td>
                   <th>
                     <button
-                      onClick={() => handleDelete(item._id)}
+                      onClick={() => handleDeleteItem(item)}
                       className="p-2 rounded-sm cursor-pointer bg-[#B91C1C] text-[#FFFFFF] text-xl"
                     >
                       <RiDeleteBinLine></RiDeleteBinLine>
@@ -92,4 +104,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default ManageItems;

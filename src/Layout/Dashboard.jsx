@@ -32,7 +32,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/adminHome`}
                 >
@@ -43,7 +43,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/addItems`}
                 >
@@ -54,7 +54,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/manageItems`}
                 >
@@ -65,7 +65,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/manageBookings`}
                 >
@@ -76,7 +76,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/allUsers`}
                 >
@@ -90,7 +90,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/userHome`}
                 >
@@ -101,7 +101,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/reservation`}
                 >
@@ -112,7 +112,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/paymentHistory`}
                 >
@@ -123,7 +123,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/cart`}
                 >
@@ -139,7 +139,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/review`}
                 >
@@ -150,7 +150,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive && "text-[#FFFFFF] font-bold "
+                    isActive ? "text-[#FFFFFF] font-bold " : ""
                   }
                   to={`/dashboard/booking`}
                 >
@@ -164,7 +164,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive && "text-[#FFFFFF] font-bold "
+               isActive ? "text-[#FFFFFF] font-bold " : ""
               }
               to={`/`}
             >
@@ -175,7 +175,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive && "text-[#FFFFFF] font-bold "
+                isActive ? "text-[#FFFFFF] font-bold " : ""
               }
               to={`/menu`}
             >
@@ -186,7 +186,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive && "text-[#FFFFFF] font-bold "
+                isActive ? "text-[#FFFFFF] font-bold " : ""
               }
               to={`/order/salad`}
             >
@@ -197,7 +197,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive && "text-[#FFFFFF] font-bold "
+                isActive ? "text-[#FFFFFF] font-bold " : ""
               }
               to={`/contact`}
             >

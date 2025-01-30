@@ -10,13 +10,13 @@ import { Tooltip } from "react-tooltip";
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
-  console.log(cart);
+  // console.log(cart);
 
   const handleLogout = () => {
     logOut()
       .then((result) => {})
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   const navLinks = (
