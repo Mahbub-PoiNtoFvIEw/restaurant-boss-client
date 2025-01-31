@@ -8,7 +8,6 @@ import Menu from "../Pages/Menu/Menu/Menu";
 import Order from "../Pages/Order/Order/Order";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
-import Secret from "../Pages/Secret/Secret";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart/Cart";
@@ -17,6 +16,9 @@ import AddItems from "../Pages/Dashboard/AddItems/AddItems";
 import AdminRoutes from "./AdminRoutes";
 import ManageItems from "../Pages/ManageItems/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import ContactUs from "../Pages/Contact/ContactUs";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
  export const router = createBrowserRouter([
     {
@@ -44,8 +46,8 @@ import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
           element: <SignUp></SignUp>
         },
         {
-          path: '/secret',
-          element: <PrivateRoute><Secret></Secret></PrivateRoute>
+          path: '/contact',
+          element: <ContactUs></ContactUs>
         }
       ]
     },
@@ -58,8 +60,16 @@ import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
           path: 'cart',
           element: <Cart></Cart>
         },
+        {
+          path: 'payment',
+          element: <Payment></Payment>
+        },
 
         // Admin routes
+        {
+          path: 'adminHome',
+          element: <AdminRoutes><AdminHome></AdminHome></AdminRoutes>
+        },
         {
           path: 'addItems',
           element: <AdminRoutes><AddItems></AddItems></AdminRoutes>

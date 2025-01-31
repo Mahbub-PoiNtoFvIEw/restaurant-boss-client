@@ -4,6 +4,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../../Componants/SectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -36,12 +37,21 @@ const Cart = () => {
   };
   return (
     <div>
-        <SectionTitle subHeading={"My Cart"} Heading={"WANNA ADD MORE?"}></SectionTitle>
+      <SectionTitle
+        subHeading={"My Cart"}
+        Heading={"WANNA ADD MORE?"}
+      ></SectionTitle>
       <div className="bg-[#FFFFFF] mx:p-10 p-2 md:mx-10">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Items : {cart.length}</h2>
           <h2 className="text-2xl font-bold">Total Price : ${totalPrice}</h2>
-          <button className="btn  bg-[#D1A054] text-white">Pay</button>
+          {cart.length ?<Link to={`/dashboard/payment`}>
+            <button className="btn bg-[#D1A054] text-white">Pay</button>
+          </Link>
+          :
+          <button  className="btn text-white cursor-not-allowed bg-slate-300
+          ">Pay</button>
+          }
         </div>
         <div className="overflow-x-auto">
           <table className="table">

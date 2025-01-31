@@ -1,16 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import "../NavBar/NavBar.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import { BsCart } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import useCart from "../../../Hooks/useCart";
 import { Tooltip } from "react-tooltip";
+import useAdmin from "../../../Hooks/useAdmin";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
-  // console.log(cart);
 
   const handleLogout = () => {
     logOut()
@@ -22,16 +23,44 @@ const NavBar = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink to={`/`}>Home</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}
+          to={`/`}
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to={`/menu`}>Our Menu</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}
+          to={`/contact`}
+        >
+          Contact us
+        </NavLink>
       </li>
       <li>
-        <NavLink to={`/order/salad`}>Order Food</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}
+          to={`/dashboard`}
+        >
+          Dashboard
+        </NavLink>
       </li>
       <li>
-        <NavLink to={`/secret`}>Secret</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}
+          to={`/menu`}
+        >
+          Our Menu
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}
+          to={`/order/salad`}
+        >
+          Order Food
+        </NavLink>
       </li>
     </>
   );
@@ -58,7 +87,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-[#0000004D] rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-[#0000004D] rounded-box z-[1] mt-3 w-52 p-2 shadow uppercase"
             >
               {navLinks}
             </ul>
@@ -68,23 +97,29 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+          <ul className="menu menu-horizontal px-1 uppercase">{navLinks}</ul>
         </div>
         <div className="navbar-end items-center">
-          <Link to={`/dashboard/cart`}>
+          <Link to={'/dashboard/cart'}>
             <div className="relative mr-1">
               <FiShoppingCart className="text-5xl"></FiShoppingCart>
-              <p className="absolute font-bold text-[16px] top-2 right-2 text-[#ee8e0e]">+{cart.length}</p>
+              <p className="absolute font-bold text-[16px] top-2 right-2 text-[#ee8e0e]">
+                +{cart.length}
+              </p>
             </div>
           </Link>
           {user ? (
             <>
-              <button onClick={handleLogout} className="btn px-1 py-0 ml-2 mr-1 btn-ghost">
+              <button
+                onClick={handleLogout}
+                className="btn px-1 py-0 ml-2 mr-1 btn-ghost"
+              >
                 Logout
               </button>
               {user?.photoURL && (
                 <img
-                data-tooltip-id="my-tooltip" data-tooltip-content={user?.email}
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={user?.email}
                   className="h-10 w-10 rounded-full border-2 cursor-pointer"
                   src={user?.photoURL}
                   alt=""

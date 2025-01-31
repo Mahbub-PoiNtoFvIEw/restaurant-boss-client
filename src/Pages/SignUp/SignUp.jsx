@@ -7,6 +7,8 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SocialLogin from "../../Componants/SocialLogin/SocialLogin";
+import img from '../../assets/others/authentication.png';
+import img2 from '../../assets/others/authentication2.png';
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,18 +65,19 @@ const SignUp = () => {
       <Helmet>
         <title>Bistro Boss | SignUp</title>
       </Helmet>
-      <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content md:flex">
+      <div
+        className="hero my-2 mx-2 py-6"
+        style={{
+          backgroundImage: `url(${img})`, // Custom width & height
+        }}
+      >
+        <div className="md:flex flex-row-reverse justify-center items-center shadow-2xl w-[70%]">
           <div className="text-center md:w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">SignUp now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+            <img src={img2} alt="" />
           </div>
-          <div className="card bg-base-100 md:w-1/2 max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body pb-0">
+          <div className="card md:w-1/2 max-w-sm shrink-0">
+          <h1 className="text-3xl font-bold mb-2 text-center">Sign Up !</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body py-0">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -154,22 +157,21 @@ const SignUp = () => {
               </div>
               <div className="form-control mt-6">
                 <input
-                  className="btn w-full btn-primary"
+                  className="btn w-full bg-[#D1A054] text-white"
                   type="submit"
                   value="SinUp"
                 />
               </div>
             </form>
-            <div className="text-center py-2">
+            <div className="text-center py-2 mb-2">
               <div>
-                <p>
+                <p className="text-[#D1A054]">
                   Already Registered ?
-                  <Link to={`/login`} className="btn btn-link pl-1">
+                  <Link to={`/login`} className="ml-2">
                     Go to Log in
                   </Link>
                 </p>
-                <div className="divider px-8 my-0"></div>
-                <span>Or Sign in with</span>
+                <div className="divider px-8 my-2"><span>Or Sign in with</span></div>
               </div>
               <div className="mx-auto">
                 <SocialLogin></SocialLogin>
