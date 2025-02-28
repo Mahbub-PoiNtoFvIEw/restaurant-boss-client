@@ -11,6 +11,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [ isAdmin ] = useAdmin();
   const [cart] = useCart();
 
   const handleLogout = () => {
@@ -38,14 +39,28 @@ const NavBar = () => {
           Contact us
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}
-          to={`/dashboard`}
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {
+        user && isAdmin && 
+        <li>
+          <NavLink
+            className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}
+            to={`/dashboard/adminHome`}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      }
+      {
+        user && !isAdmin && 
+        <li>
+          <NavLink
+            className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}
+            to={`/dashboard/userHome`}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      }
       <li>
         <NavLink
           className={({ isActive }) => (isActive ? "text-[#EEFF25] " : "")}

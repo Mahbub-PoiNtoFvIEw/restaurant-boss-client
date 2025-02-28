@@ -20,6 +20,7 @@ import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import ContactUs from "../Pages/Contact/ContactUs";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 
  export const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
       children:[
         // normal users routes
         {
+          path: 'userHome',
+          element: <UserHome></UserHome>
+        },
+        {
           path: 'cart',
           element: <Cart></Cart>
         },
@@ -86,7 +91,7 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
         {
           path: 'updateItem/:id',
           element: <AdminRoutes><UpdateItem></UpdateItem></AdminRoutes>,
-          loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
+          loader: ({params}) => fetch(`https://restaurant-boss-server-eight.vercel.app/menu/${params.id}`)
         },
         {
           path: 'allUsers',
